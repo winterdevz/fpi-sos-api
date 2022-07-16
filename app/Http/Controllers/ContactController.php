@@ -48,9 +48,12 @@ class ContactController extends Controller
 
     public function sendSMSContact(MessageRequest $request)
     {
-        $contacts = Cache::remember('users', 5*60*60, function () {
-            return Contact::get();
-        });
+        // $contacts = Cache::remember('users', 5*60*60, function () {
+        //     return Contact::get();
+        // });
+
+        $contacts = Contact::get();
+      
       
         
         $allContact = [];
