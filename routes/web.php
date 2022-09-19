@@ -1,9 +1,7 @@
 <?php
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,24 +12,21 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [AuthenticatedSessionController::class, 'create'])
-                ->name('login');
+Route::redirect('/', '/login');
 // Route::get('/', function () {
-//     redirect('/login');
-//     // return Inertia::render('Welcome', [
-//     //     'canLogin' => Route::has('login'),
-//     //     'canRegister' => Route::has('register'),
-//     //     'laravelVersion' => Application::VERSION,
-//     //     'phpVersion' => PHP_VERSION,
-//     // ]);
+//     return view('welcome');
 // });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('/contacts', function () {
-    return Inertia::render('Contact');
-})->middleware(['auth', 'verified'])->name('contacts');
+// Route::get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Route::get('/contacts', function () {
+//     return Inertia::render('Contact');
+// })->middleware(['auth', 'verified'])->name('contacts');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 require __DIR__.'/auth.php';

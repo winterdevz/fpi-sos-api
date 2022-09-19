@@ -9,12 +9,14 @@ use App\Http\Requests\MessageRequest;
 use Illuminate\Http\JsonResponse;
 use App\Services\SMSService;
 use Illuminate\Support\Facades\Cache;
+use Twilio;
+
 
 class ContactController extends Controller
 {
     public function index()
     {
-        
+        return view('contact');
     }
 
     public function saveContact(ContactRequest $request)
@@ -51,7 +53,7 @@ class ContactController extends Controller
         // $contacts = Cache::remember('users', 5*60*60, function () {
         //     return Contact::get();
         // });
-
+        
         $contacts = Contact::get();
       
       
@@ -59,11 +61,14 @@ class ContactController extends Controller
         $allContact = [];
         foreach($contacts as $contact){
             $allContact[] = $contact->contact;
+            // dd($request->message);
+            // Twilio::message($contact->contact, $request->message);
         }
-
+        
+        $convertPhoneNumbers =  implode(',', $allContact); 
         $smsService = new SMSService();
-        $response = $smsService->sendSMS(
-            $allContact,
+        $response = $smsService->nigeriaBulkSMS(
+            $convertPhoneNumbers,
             $request->message
         );
         $responseStatus = $response->status();

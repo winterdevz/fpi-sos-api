@@ -34,7 +34,7 @@ const submit = () => {
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
-
+ 
         <form @submit.prevent="submit">
             <div>
                 <BreezeLabel for="email" value="Email" />

@@ -50,7 +50,7 @@ import { Head } from '@inertiajs/inertia-vue3';
                             </div>
 
                             <button v-show="isEdit" v-on:click.prevent="saveContact()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-2">Save</button>
-                            <button v-show="!isEdit" v-on:click.prevent="updateContact()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-2">Update</button>
+                            <button v-show="!isEdit" v-on:click.prevent="updateContact()"   class="mr-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-2">Update</button>
                             <button v-show="!isEdit" v-on:click.prevent="newContact()">Add New Contact</button>
                             </div>
  

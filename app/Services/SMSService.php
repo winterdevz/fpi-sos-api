@@ -18,11 +18,18 @@ class SMSService
         $this->smsConfig = [
             "api_key" => config('app.termiiSMS'),
             "to" => $phoneNumbers,  
-            "from" => "FPI-SOS",
+            "from" => "Zealarax",
             "sms" => $message,  
             "type" => "plain",  
             "channel" => "generic" ]; 
             $response = Http::post($this->smsUrl, $this->smsConfig);
             return   $response;
+    }
+
+    public function nigeriaBulkSMS(string $phoneNumbers, string $message)
+    { 
+	    
+        $response = Http::get("http://portal.nigeriabulksms.com/api/?username=amobeeb1net@gmail.com&password=Damilare@2022&message=$message&sender=FPISOS&mobiles=$phoneNumbers");
+        return   $response;
     }
 }
